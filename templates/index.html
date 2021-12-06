@@ -1,20 +1,37 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="container">
-        <div class="card">
-            <h1 class="py-3 display-2">{{name}}</h1>
-            <div class="py-4">
-                <p class="wi wi-day-sunny display-2"></p>
-                <div class="py-4 temp-desc">
-                    <p>{{temp}}&deg; Cel</p>
-                    <p>
-                    <span>{{temp_max}}&deg; Max &ensp;</span>
-                    <span>{{temp_min}}&deg; Min</span>
-                    </p>
-                    <p>{{desc}}</p>
-                </div>
-                
-            </div>
-        </div>
+{% extends 'base.html' %} {% block content %}
+
+<form action="/" method="post">
+  {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md offset-md-2">
+        <input
+          type="text"
+          name="city"
+          class="form-control"
+          placeholder="Enter City"
+        />
+      </div>
+      <div class="col-md mt-md-0 text-md-left">
+        <button type="submit" class="btn btn-warning">Get Weather</button>
+      </div>
     </div>
-{% endblock %}
+  </div>
+</form>
+
+{% for message in messages %}
+<div class="container pt-4">
+  <h1 class="py-3 display-2">{{name}}</h1>
+  <div class="py-4">
+    <p class="wi wi-owm-{{id}} display-2"></p>
+    <div class="py-4 temp-desc">
+      <p>{{temp}}&deg; Cel</p>
+      <p>
+        <span>{{temp_max}}&deg; Max &ensp;</span>
+        <span>{{temp_min}}&deg; Min</span>
+      </p>
+      <p>{{desc}}</p>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock %}
